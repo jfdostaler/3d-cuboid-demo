@@ -2,13 +2,184 @@
 <html>
 
 <head>
-	<script src="lib/three/build/three.min.js"></script>
+	<meta charset='utf8'>
+	<script src="lib/three/build/three.js"></script>
 	<script src="lib/three/examples/js/controls/OrbitControls.js"></script>
-	<script src="lib/three/examples/js/renderers/CanvasRenderer.js"></script>
-	<script src="lib/three/examples/js/renderers/Projector.js"></script>
+	<script src="lib/d3/d3.min.js"></script>
+	
+	<style type='text/css'>
+		#form {
+			position: absolute;
+			top: 0;
+			left: 0;
+			height: 100%;
+			width: 33%;
+		}
+		#renderer {
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 10%;
+			width: 65%;
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+		
+		#form th {
+			background-color: darkgray;
+			color: white;
+		}
+		#form th.subtitle {
+			background-color: #FFFFE6;
+			color: black;
+			font-weight: bolder;
+			padding-top: 0.2em;
+		}
+		#form td {
+			border: solid darkgray 1px;
+			background-color: #F0F0F0;
+			color: darkgray;
+		}
+		#form td input {
+			background-color: #FFFFE6;
+			text-align: center;
+			color: black;
+		}
+
+	</style>
 </head>
 
 <body>
-	<script src="./three_test.js"></script>
+	<div id="form" style='text-align: center; margin: 1.5em'>
+
+		<p style='font-size: 155%; padding: 0; margin: 0;'>
+			<strong>Display:</strong>
+			<input type='radio' name='rdoSurgeon' id='rdoSurgeon' value='surgeon'><label for='rdoSurgeon'>Surgeon</label>
+			<input type='radio' name='rdoSurgeon' id='rdoPathologist' value='pathologist'><label for='rdoPathologist'>Pathologist</label>
+		</p>
+		<table style='margin: 0 auto; padding-top: 1em;'>
+			<tr><th>Point</th><th>X-axis</th><th>Y-axis</th><th>Z-axis</th></tr>
+			<tr class='subtitle'><th colspan=4>Surgeon measurement</tr>
+			<tr class='surgeon'>
+				<th>0</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'>0</td>
+				<td class='coord z'>0</td>
+			</tr>
+			<tr class='surgeon a'>
+				<th>A</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'>0</td>
+				<td class='coord z'>0</td>
+			</tr>
+			<tr class='surgeon b'>
+				<th>B</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'>0</td>
+			</tr>
+			<tr class='surgeon c'>
+				<th>C</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'>0</td>
+			</tr>
+			<tr class='surgeon d'>
+				<th>D</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+			<tr class='surgeon e'>
+				<th>E</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'>0</td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+			<tr class='surgeon f'>
+				<th>F</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'>0</td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+			<tr class='surgeon g'>
+				<th>G</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+			<tr class='subtitle'><th colspan=4>Pathologist measurement</tr>
+			<tr class='pathologist'>
+				<th>0</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'>0</td>
+				<td class='coord z'>0</td>
+			</tr>	
+			<tr class='pathologist a'>
+				<th>A</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'>0</td>
+				<td class='coord z'>0</td>
+			</tr>
+			<tr class='pathologist b'>
+				<th>B</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'>0</td>
+			</tr>
+			<tr class='pathologist c'>
+				<th>C</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'>0</td>
+			</tr>
+			<tr class='pathologist d'>
+				<th>D</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+			<tr class='pathologist e'>
+				<th>E</th>
+				<td class='coord x'>0</td>
+				<td class='coord y'>0</td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+			<tr class='pathologist f'>
+				<th>F</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'>0</td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+			<tr class='pathologist g'>
+				<th>G</th>
+				<td class='coord x'><input value='5'></td>
+				<td class='coord y'><input value='5'></td>
+				<td class='coord z'><input value='5'></td>
+			</tr>
+		</table>
+		
+		<hr>
+		<h2>Instructions</h2>
+		<div style='text-align: left;'>
+			<p>Click the radio buttons at the top of the page to switch between the Surgeon and Pathologist measurements.</p>
+			<p>The shape will change size dynamically as coordinates are entered. Either press 'Enter', or select the next text box, for the change to take effect.</p>
+			<p>Camera controls:
+			<ul>
+				<li>Left mouse button + drag = rotate</li>
+				<li>Right mouse button + drag = pan</li>
+				<li>Middle button + drag (or scroll wheel) = zoom</li>
+			</ul>
+			
+			<p>For a diagram of the axes/points, click <a href='images/points.png' target='_blank'>here</a>.</p>
+			<p>To try out random coordinates, click <a href='?debug'>here</a>.</p>
+		</div>
+	</div>
+	<div id='renderer'>
+	
+	</div>
+	
+	<script src="three_test.js"></script>
 </body>
 </html>
